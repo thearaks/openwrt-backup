@@ -13,12 +13,13 @@ NOW=$(date +%Y%m%d_%H%M)
 mkdir -p ${BACKUP_FOLDER}
 
 #Remove all backups older than DELETION_THRESHOLD days
-find ${BACKUP_FOLDER}/*.tar.gz -mtime ${DELETION_THRESHOLD} -type f -delete
+find ${BACKUP_FOLDER}/*packages*.txt -mtime ${DELETION_THRESHOLD} -type f -delete
+find ${BACKUP_FOLDER}/*etc*.tar.gz -mtime ${DELETION_THRESHOLD} -type f -delete
 
-#Backup installed package list to /etc
-opkg list-installed | cut -f 1 -d ' ' > ${BACKUP_FOLDER}/packages.txt
+#Backup installed package list
+opkg list-installed | cut -f 1 -d ' ' > ${BACKUP_FOLDER}/${HOSTNAME}_packages_${NOW}.txt
 
 #Backup /etc
-tar -czf ${BACKUP_FOLDER}/${HOSTNAME}_${NOW}_etc.tar.gz ${CONFIG_FOLDER} >/dev/null 2>&1
+tar -czf ${BACKUP_FOLDER}/${HOSTNAME}_etc_${NOW}.tar.gz ${CONFIG_FOLDER} >/dev/null 2>&1
 
 exit
