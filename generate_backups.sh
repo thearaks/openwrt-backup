@@ -5,13 +5,14 @@
 #Set variables
 CONFIG_FOLDER=/etc
 BACKUP_FOLDER=/backup/backup
+DELETION_THRESHOLD=+186
 HOSTNAME=`uci get system.@system[0].hostname`
 
 #Make backup directory if it doesn't exist
 mkdir -p ${BACKUP_FOLDER}
 
-#Remove all old backups
-rm ${BACKUP_FOLDER}/*.gz
+#Remove all backups older than DELETION_THRESHOLD days
+find ${BACKUP_FOLDER}/*.tar.gz -mtime ${DELETION_THRESHOLD} -type f -delete
 
 #Backup installed package list to /etc
 opkg list-installed | cut -f 1 -d ' ' > /etc/packages.txt
