@@ -11,7 +11,7 @@ HOSTNAME=`uci get system.@system[0].hostname`
 mkdir -p ${BACKUP_FOLDER}
 
 #Remove all old backups
-rm /backup/backup/*.gz
+rm ${BACKUP_FOLDER}/*.gz
 
 #Backup installed package list to /etc
 opkg list-installed | cut -f 1 -d ' ' > /etc/packages.txt
