@@ -4,7 +4,7 @@
 
 #Set variables
 CONFIG_FOLDER=/etc
-BACKUP_FOLDER=/backup/backup
+BACKUP_FOLDER=/mnt/backup
 DELETION_THRESHOLD=+186
 HOSTNAME=`uci get system.@system[0].hostname`
 NOW=$(date +%Y%m%d_%H%M)
