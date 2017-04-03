@@ -16,7 +16,7 @@ mkdir -p ${BACKUP_FOLDER}
 find ${BACKUP_FOLDER}/*.tar.gz -mtime ${DELETION_THRESHOLD} -type f -delete
 
 #Backup installed package list to /etc
-opkg list-installed | cut -f 1 -d ' ' > /etc/packages.txt
+opkg list-installed | cut -f 1 -d ' ' > ${BACKUP_FOLDER}/packages.txt
 
 #Backup /etc
 tar -czf ${BACKUP_FOLDER}/${HOSTNAME}_${NOW}_etc.tar.gz ${CONFIG_FOLDER} >/dev/null 2>&1
