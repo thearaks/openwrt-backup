@@ -7,6 +7,7 @@ CONFIG_FOLDER=/etc
 BACKUP_FOLDER=/backup/backup
 DELETION_THRESHOLD=+186
 HOSTNAME=`uci get system.@system[0].hostname`
+NOW=$(date +%Y%m%d_%H%M)
 
 #Make backup directory if it doesn't exist
 mkdir -p ${BACKUP_FOLDER}
@@ -18,6 +19,6 @@ find ${BACKUP_FOLDER}/*.tar.gz -mtime ${DELETION_THRESHOLD} -type f -delete
 opkg list-installed | cut -f 1 -d ' ' > /etc/packages.txt
 
 #Backup /etc
-tar -czf ${BACKUP_FOLDER}/${HOSTNAME}_$(date +%Y%m%d_%H%M)_etc.tar.gz ${CONFIG_FOLDER} >/dev/null 2>&1
+tar -czf ${BACKUP_FOLDER}/${HOSTNAME}_${NOW}_etc.tar.gz ${CONFIG_FOLDER} >/dev/null 2>&1
 
 exit
